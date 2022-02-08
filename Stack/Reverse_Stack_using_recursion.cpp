@@ -1,49 +1,54 @@
-/******************************************************************************
-
-                              Online C++ Compiler.
-               Code, Compile, Run and Debug C++ program online.
-Write your code in this editor and press "Run" button to compile and execute it.
-
-*******************************************************************************/
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
-void insertatbottom(stack<int>&stack,int x){
-     if(stack.empty()){
-        stack.push(x);
-         return;
-     }
-    int temp=stack.top();
-    stack.pop();
-    insertatbottom(stack,x);
-    stack.push(temp);  
-}
-void helper(stack<int> &stack){
-    if(stack.empty()==true){
+
+void sortedInsert(stack<int> &s, int curr)
+{
+    //base case
+    if (s.empty()==true or (s.empty()==false && s.top() < curr ))
+    {
+        s.push(curr);
+        cout<<endl;
         return;
-    } 
- int x=stack.top();
-    stack.pop();
-    helper(stack);
-    insertatbottom(stack,x);
+    }
+    int temp = s.top();
+    s.pop();
+    sortedInsert(s, curr);
+    s.push(temp);
 }
-void reverseStack(stack<int> &stack) {
+void sortStack(stack<int> &s)
+{
+    //Base case
     
-     helper(stack);
+    if (s.empty() == true)
+    {
+        return;
+    }
     
+    int temp = s.top();
+    s.pop();
+    sortStack(s);
+    sortedInsert(s, temp);
 }
 
-int main(){
-    stack<int>s;
-    s.push(3);
-    s.push(4);
-    s.push(7);
-    s.push(9);
-    reverseStack(s);
-    while(!s.empty()){
+void helper(stack<int>&s){
+    sortStack(s);
+    while(s.empty()==false){
         cout<<s.top()<<" ";
         s.pop();
     }
-    `   2
-    return 0;
+}
+
+int main()
+{
+    stack<int> s;
+    s.push(-2);
+    s.push(5);
+    s.push(7);
+    s.push(-9);
+    s.push(3);
+
+    helper(s);
     
+
+    return 0;
 }
