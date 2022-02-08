@@ -30,13 +30,7 @@ void sortStack(stack<int> &s)
     sortedInsert(s, temp);
 }
 
-void helper(stack<int>&s){
-    sortStack(s);
-    while(s.empty()==false){
-        cout<<s.top()<<" ";
-        s.pop();
-    }
-}
+
 
 int main()
 {
@@ -47,8 +41,12 @@ int main()
     s.push(-9);
     s.push(3);
 
-    helper(s);
+    sortStack(s);
     
+     while(s.empty()==false){
+        cout<<s.top()<<" ";
+        s.pop();
+    }
 
     return 0;
 }
